@@ -21,6 +21,23 @@ the file layout.
 
 ---
 
+Three frames from the included `starter/`, captured at fixed scroll-progress values —
+`?p=0.16`, `?p=0.42`, `?p=0.97`. One pinned section, one pure function, no video:
+
+![Assemble beat — the object gains material](docs/img/beat-assemble.png)
+![Examine beat — the camera dives to one detail and the analysis overlay resolves](docs/img/beat-examine.png)
+![Scale beat — the camera pulls back to many](docs/img/beat-scale.png)
+
+Being able to address any moment of the film by a number — and screenshot it — is not a
+nicety here. It's what the whole method is built on. Those three images were produced by
+one command (`node tools/shots.mjs`), and so was the review pass that found three bugs in
+this scene before it shipped.
+
+The starter measures **89 KB first load, 1.58 s mobile LCP** under 4× CPU throttling, and
+**0.0000 CLS**.
+
+---
+
 ## The thesis
 
 Premium is not more effects. Most sites that read as cheap have *more* motion than sites

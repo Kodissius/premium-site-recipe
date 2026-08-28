@@ -6,6 +6,7 @@
      node shots.mjs http://localhost:8734 --p 0,0.25,0.5,0.75,1
      node shots.mjs http://localhost:8734 --ss 0,1400,2800 --out shots-layout
      node shots.mjs http://localhost:8734 --mobile
+     node shots.mjs http://localhost:8734 --dsf 1        # 1x pixels, smaller files
 
    Requires the ?p= debug hook in the page (recipe/05-verify.md). Review the
    output as a GRID, not one at a time — dead beats and repeated frames are
@@ -24,6 +25,7 @@ const ps = flag("--p", "0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1")
 const sss = flag("--ss", "").split(",").map((s) => s.trim()).filter(Boolean);
 const outDir = flag("--out", "shots");
 const mobile = args.includes("--mobile");
+const dsf = Number(flag("--dsf", "2")) || 2;   // device pixel ratio of the capture
 
 mkdirSync(outDir, { recursive: true });
 
@@ -36,8 +38,8 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 await page.setViewport(
   mobile
-    ? { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true }
-    : { width: 1440, height: 900, deviceScaleFactor: 2 }
+    ? { width: 390, height: 844, deviceScaleFactor: dsf, isMobile: true, hasTouch: true }
+    : { width: 1440, height: 900, deviceScaleFactor: dsf }
 );
 
 async function shoot(query, file) {
