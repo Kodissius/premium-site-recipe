@@ -1,0 +1,45 @@
+/* ============================================================================
+   TOKENS — the whole material, defined once, before any component.
+   Replace these values with your own palette. Do not add a fourth surface
+   depth, and do not use --accent anywhere outside the rule stated below.
+   See recipe/02-tokens.md.
+   ========================================================================== */
+
+:root {
+  /* ---- surfaces: one family, three depths ---- */
+  --ground:      #121417;
+  --panel:       #1a1d22;
+  --panel-lit:   #242931;   /* the signature object's material — reads against --ground */
+  --panel-deep:  #15181c;
+
+  /* ---- linework: one hue, three alphas ---- */
+  --line:        rgba(159, 180, 200, .28);
+  --line-soft:   rgba(159, 180, 200, .14);
+  --grid-line:   rgba(198, 212, 226, .04);
+
+  /* ---- text: four tints, never more ---- */
+  --white:       #f4f6f8;   /* headlines only */
+  --text:        #e6e8ec;   /* body */
+  --dim:         #8b93a0;   /* secondary, mono, captions */
+  --muted:       #566070;   /* fine print */
+
+  /* ---- ONE accent. Allowed: primary CTA, active-phase mark, ::selection. ---- */
+  --accent:       #c8371e;
+  --accent-press: #a92d17;
+
+  /* ---- reserved second family: the signature scene's data overlay ONLY ---- */
+  --data-cold:   #2f6fd0;
+  --data-mid:    #38b27a;
+  --data-warm:   #d9a520;
+  --data-hot:    #c8371e;
+
+  /* ---- type: three jobs. Self-host a real display face for a real project. ---- */
+  --font-display: "Archivo Black", "Helvetica Neue", Impact, sans-serif;
+  --font-body:    system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---- geometry ---- */
+  --gutter:    clamp(20px, 5vw, 72px);
+  --sheet-max: 1180px;
+  --radius:    2px;          /* a cap, not a suggestion */
+}

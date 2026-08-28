@@ -1,0 +1,14 @@
+{
+  "name": "premium-site-recipe-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Measurement and screenshot rigs for the premium site recipe.",
+  "scripts": {
+    "measure": "node measure.mjs",
+    "shots": "node shots.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

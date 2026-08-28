@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starter — The Premium Site Recipe</title>
+<meta name="description" content="A minimal working implementation of the premium site recipe: one pinned scrub, one segment-timed signature scene, one reveal class.">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="nav-name mono" href="#top">RECIPE <span class="nav-rev">STARTER · REV 1</span></a>
+  <nav class="nav-links mono" aria-label="Sections">
+    <a href="#how">HOW</a>
+    <a href="#beats">BEATS</a>
+    <a href="#next">NEXT</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO: the one pinned scrub ================= -->
+  <section class="hero">
+    <div class="hero-pin">
+      <canvas id="scene" aria-hidden="true"></canvas>
+
+      <div class="hero-copy">
+        <p class="eyebrow mono">THE PREMIUM SITE RECIPE</p>
+        <h1 class="hero-h1">
+          <span class="line"><span>ONE IDEA,</span></span>
+          <span class="line"><span>ONE MATERIAL,</span></span>
+          <span class="line"><span>ONE SIGNATURE.</span></span>
+        </h1>
+        <p class="hero-sub">
+          Scroll. The object below is drawn by a single pure function of scroll
+          progress — the whole film is one <code>apply(p)</code> call and a map of
+          named beats.
+        </p>
+        <div class="hero-actions">
+          <a class="cta" href="#how">READ THE METHOD</a>
+          <a class="cta ghost" href="?p=0.45">FREEZE AT p=0.45</a>
+        </div>
+      </div>
+
+      <div class="hero-phase mono" aria-hidden="true">
+        <span class="phase-label" data-phase="0">01 OUTLINE</span>
+        <span class="phase-label" data-phase="1">02 ASSEMBLE</span>
+        <span class="phase-label" data-phase="2">03 EXAMINE</span>
+        <span class="phase-label" data-phase="3">04 REVISE</span>
+        <span class="phase-label" data-phase="4">05 VERIFY</span>
+        <span class="phase-label" data-phase="5">06 SCALE</span>
+      </div>
+
+      <p class="hero-disclaim mono">ILLUSTRATIVE GEOMETRY — VALUES ARE NOT REAL DATA</p>
+      <p class="scroll-hint mono">SCROLL</p>
+    </div>
+  </section>
+
+  <!-- ================= PROOF STRIP ================= -->
+  <section class="strip">
+    <div class="strip-grid">
+      <div class="strip-item">
+        <p class="strip-k mono">TIER 1</p>
+        <p class="strip-v">Page glide</p>
+        <p class="strip-d">Smooth scroll, lerp 0.08, fine pointers only.</p>
+      </div>
+      <div class="strip-item">
+        <p class="strip-k mono">TIER 2</p>
+        <p class="strip-v">One pinned scrub</p>
+        <p class="strip-d">500% of viewport, scrubbed through a proxy so wheel ticks glide.</p>
+      </div>
+      <div class="strip-item">
+        <p class="strip-k mono">TIER 3</p>
+        <p class="strip-v">Reveal on enter</p>
+        <p class="strip-d">One class, fired once at top 82%. Nothing bespoke.</p>
+      </div>
+      <div class="strip-item">
+        <p class="strip-k mono">TIER 4</p>
+        <p class="strip-v">There is no tier 4</p>
+        <p class="strip-d">Adding one is how a page starts to feel busy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW ================= -->
+  <section class="sheet" id="how">
+    <div class="sheet-frame">
+      <div class="sheet-head">
+        <h2 class="sheet-h2">The scene is a pure function</h2>
+        <p class="sheet-meta mono">SHT 1 OF 2 · REV 1</p>
+      </div>
+      <div class="sheet-body">
+        <p>
+          Everything the canvas above does is decided by <code>apply(p)</code>, where
+          <code>p</code> is scroll progress from 0 to 1. No internal state, no
+          &ldquo;current step&rdquo;, no accumulators. The same <code>p</code> always
+          produces the same frame.
+        </p>
+        <p>
+          That is why scrubbing backwards works, why
+          <a href="?p=0.62">?p=0.62</a> freezes an exact moment, and why a screenshot
+          script can shoot the whole film as a contact sheet in one command.
+        </p>
+        <pre class="code mono"><code>const seg01 = (p, [a, b]) =&gt; clamp01((p - a) / (b - a));
+const ease  = (t) =&gt; t * t * (3 - 2 * t);        // smoothstep
+const ss    = (p, a, b) =&gt; ease(seg01(p, [a, b]));
+
+function apply(p, t = 0) {
+  const build = ss(p, ...SEG.build);
+  const zoom  = ss(p, ...SEG.zoom);
+  camScale    = mix(mix(1, 3.2, zoom), 0.30, ss(p, ...SEG.scale));
+  fillAlpha   = build * (1 - 0.85 * heat);
+  // ...one line per visual property, across the whole film
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BEATS ================= -->
+  <section class="sheet" id="beats">
+    <div class="sheet-frame">
+      <div class="sheet-head">
+        <h2 class="sheet-h2">Choreography lives in a data map</h2>
+        <p class="sheet-meta mono">SHT 2 OF 2 · REV 1</p>
+      </div>
+      <div class="sheet-body">
+        <p>
+          Retiming the entire film means editing one object. Cutting a beat never touches
+          drawing code. Click a beat to jump the scene to its midpoint.
+        </p>
+        <ul class="beats mono">
+          <li><a href="?p=0.04"><b>outline</b> <span>0.00 – 0.08</span></a></li>
+          <li><a href="?p=0.14"><b>build</b>   <span>0.08 – 0.20</span></a></li>
+          <li><a href="?p=0.25"><b>zoom</b>    <span>0.20 – 0.30</span></a></li>
+          <li><a href="?p=0.42"><b>examine</b> <span>0.30 – 0.55</span></a></li>
+          <li><a href="?p=0.65"><b>revise</b>  <span>0.55 – 0.75</span></a></li>
+          <li><a href="?p=0.82"><b>verify</b>  <span>0.75 – 0.90</span></a></li>
+          <li><a href="?p=0.97"><b>scale</b>   <span>0.90 – 1.00</span></a></li>
+        </ul>
+        <p class="note">
+          Three things encode this timing and will drift if you let them: the
+          <code>SEG</code> map, the pin length (<code>end: "+=500%"</code>), and the phase
+          labels. Comment each one pointing at the other two.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEXT ================= -->
+  <section class="sheet" id="next">
+    <div class="sheet-frame">
+      <div class="sheet-head">
+        <h2 class="sheet-h2">Make it yours</h2>
+        <p class="sheet-meta mono">NEXT STEPS</p>
+      </div>
+      <div class="sheet-body">
+        <ol class="steps">
+          <li>Fill in <code>recipe/brief-template.md</code>. Do not skip this.</li>
+          <li>Replace the palette in <code>css/tokens.css</code> with your material.</li>
+          <li>Replace <code>SEG</code> and the drawing code in <code>js/scene.js</code>
+              with your subject&rsquo;s true story. Keep <code>apply(p)</code> pure.</li>
+          <li>Shoot a contact sheet: <code>node tools/shots.mjs http://localhost:8734</code></li>
+          <li>Measure: <code>node tools/measure.mjs http://localhost:8734</code></li>
+          <li>Review against your banned list. Delete anything that encodes nothing.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="tblock">
+  <div class="tblock-grid mono">
+    <div><p class="k">DOCUMENT</p><p class="v">Premium Site Recipe — starter</p></div>
+    <div><p class="k">LIBRARIES</p><p class="v">GSAP + ScrollTrigger · Lenis</p></div>
+    <div><p class="k">SIGNATURE</p><p class="v">2D canvas, ~190 lines, no 3D</p></div>
+    <div><p class="k">LICENCE</p><p class="v">MIT — see LICENSE</p></div>
+  </div>
+</footer>
+
+<!-- Libraries. For production, vendor these locally — see SETUP.md §3. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+
+<!-- ORDER MATTERS: motion.js paints text, scene.js builds a world.
+     Text first, or the world's boot cost becomes your LCP. See LESSONS.md #13. -->
+<script defer src="js/motion.js"></script>
+<script defer src="js/scene.js"></script>
+
+</body>
+</html>

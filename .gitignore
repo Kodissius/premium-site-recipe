@@ -1,0 +1,12 @@
+node_modules/
+tools/shots/
+tools/*-out.json
+tools/baseline.txt
+tools/after.txt
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+.vscode/
+.idea/
